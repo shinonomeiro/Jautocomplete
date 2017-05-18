@@ -45,6 +45,19 @@ console.log(res); // ['構成', '厚生', '厚生年金'], or [] if there was no
 
 Returns an array of matches, empty if none.
 
+Adding an existing keyword with different transforms appends those transforms to the existing ones.
+
+```javascript
+words = [
+  { word: 'こうせい', transforms: ['公正', '校正'] }
+];
+
+Jautocomplete.add(words);
+
+res = Jautocomplete.find('こうせい');
+console.log(res); // ['構成', '厚生', '厚生年金', '公正', '校正']
+```
+
 ## Notes
 - Support for partial Japanese input not supported and won't be anytime soon. E.g. "新宿ぎょ" will not yield "新宿御苑", but "しんじゅくぎょ" will. In my opinion the trade-off between the added computation and code complexity, and the user experience is not really worth the pain of implementing it.
 - Support for partial alphabet input not supported as of yet, e.g. "invrtbr" will not yield "invertebrates" as Google does. I might add it in the future if I come up with a good implementation, though as the library description suggests, it is more optimized for Japanese input. ご了承ください。
