@@ -26,19 +26,21 @@ var words = [
 
 Jautocomplete.add(words);
 ```
-Transforms may be omitted if the keyword is identical to the suggestion, as it is the case with hiragana-only or alphabet words.
+<i>transforms</i> <b>MAY</b> be omitted if the keyword is identical to the suggestion, as it is the case with hiragana-only or alphabet words.
 
 <i>word</i> <b>MUST</b> be hiragana or alphabet characters (with the exception of ー long bar), but transforms can theoretically be anything, although kanji conversions from the associated furiganas are much preferred (as one would obtain from 自動変換, IME's auto-conversion).
 
-This function doesn't return anything.
+This function has no return value.
 
 ### Jautocomplete.find( prefix: String ) : Array
 Looks ahead for potential matches with keywords starting with <i>prefix</i>.
 
 ```javascript
 var res = Jautocomplete.find('こうせい');
-console.log(res); // ['構成', '厚生'], or [] if there was no match.
+console.log(res);
 ```
+
+Returns ['構成', '厚生', '厚生年金'], or [] if there was no match.
 
 ## Todo
 - Support for Node.js / Browserify (through npm) and Bower.
