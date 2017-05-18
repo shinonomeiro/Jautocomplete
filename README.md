@@ -1,7 +1,12 @@
 # Jautocomplete
 Lightweight JavaScript autocompletion library optimized for Japanese input.
 
-#### Browser installation
+## Demo
+Demo running at https://shinonomeiro.github.io/jautocomplete/.<br>
+Sample dataset: Japanese train station names (up to た) and random a-z English words.
+
+## Installation
+#### Browser
 The library may be imported onto your webpage by downloading <i>jautocomplete.js</i> from the <i>build</i> folder and linking to it with \<script\> tags.
 
 ```html
@@ -11,11 +16,7 @@ The library may be imported onto your webpage by downloading <i>jautocomplete.js
 #### Npm installation
 WIP
 
-## Demo
-Demo running at https://shinonomeiro.github.io/jautocomplete/.<br>
-Sample dataset: Japanese train station names (up to た) and random a-z English words.
-
-## Public API
+## Usage
 The public API exposes two functions: <i>add</i> and <i>find</i>.
 
 ### Jautocomplete.add( words: Array )
