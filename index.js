@@ -1,1 +1,1 @@
-module.exports = require('./autocomplete');
+module.exports = require('./jautocomplete');
