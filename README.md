@@ -1,7 +1,7 @@
 # Jautocomplete
 JavaScript autocompletion library optimized for Japanese input.
 
-The library may be imported into your project by navigating to the <i>build</i> folder and downloading <i>jautocomplete.js</i>.
+The library may be imported into your project by downloading <i>jautocomplete.js</i> from the <i>build</i> folder.
 
 ## Demo
 Demo running at https://shinonomeiro.github.io/jautocomplete/.<br>
