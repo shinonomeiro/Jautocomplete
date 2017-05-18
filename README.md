@@ -73,6 +73,9 @@ console.log(res); // ['構成', '厚生', '厚生年金', '公正', '校正']
 - Uppercase alphabet entries and prefixes will be forced to lowercase.
 - This is a library, and as such, no UI logic is provided on this repository. The demo is purely, uh, for demonstration purposes and is only a basic usage showcase. You will have to implement the UI yourself.
 
+## Tests
+Tests can be run with `npm test` from the command line prompt.
+
 ## Todo
 - Support for Node.js / Browserify (through npm) and Bower.
 - Custom sorting? Weight values?
