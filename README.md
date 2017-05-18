@@ -28,7 +28,7 @@ Jautocomplete.add(words);
 ```
 Transforms may be omitted if the keyword is identical to the suggestion, as it is the case with hiragana-only or alphabet words.
 
-<i>word</i> <b>MUST</b> be hiragana or alphabet characters, but transforms can theoretically be anything, although kanji conversions from the associated furiganas are much preferred (as one would obtain from 自動変換, IME's auto-conversion).
+<i>word</i> <b>MUST</b> be hiragana or alphabet characters (with the exception of ー long bar), but transforms can theoretically be anything, although kanji conversions from the associated furiganas are much preferred (as one would obtain from 自動変換, IME's auto-conversion).
 
 This function doesn't return anything.
 
