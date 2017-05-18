@@ -63,6 +63,7 @@ console.log(res); // ['構成', '厚生', '厚生年金', '公正', '校正']
 - Support for partial alphabet input not supported as of yet, e.g. "invrtbr" will not yield "invertebrates" as Google does. I might add it in the future if I come up with a good implementation, though as the library description suggests, it is more optimized for Japanese input. ご了承ください。
 - The library yields all possible keywords for a given prefix, and the list could be quite long if you gave it a lot of entries and a short prefix to work with. As a sample, the demo page from above loads 5000 Japanese keywords (10,000 total if counting the transforms as well that auto-add themselves) plus 2500 English keywords. Filtering and/or sorting results is currently left to your discretion (see Todos below).
 - Uppercase alphabet entries and prefixes will be forced to lowercase.
+- This is a library, and as such, no UI or jQuery plugin is provided on this repository. The demo is purely, uh, for demonstration purposes. You will have to implement the UI yourself if used in the browser.
 
 ## Todo
 - Support for Node.js / Browserify (through npm) and Bower.
