@@ -7,13 +7,13 @@ Sample dataset: Japanese train station names (up to た) and random a-z English 
 
 ## Installation
 #### Browser
-The library may be imported onto your webpage by downloading <i>jautocomplete.js</i> from the <i>build</i> folder and linking to it with \<script\> tags.
+The library may be imported onto your webpage by copying <i>jautocomplete.js</i> from the <i>build</i> folder to your project and linking to it with \<script\> tags.
 
 ```html
 <script src="/path/to/js/jautocomplete.js"></script>
 ```
 
-#### Npm installation
+#### NPM
 WIP
 
 ## Usage
