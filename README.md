@@ -3,6 +3,10 @@ Japanese-optimized autocompletion library for JavaScript.
 
 The library may be imported into your project by navigating to the <i>build</i> folder and downloading <i>jautocomplete.js</i>.
 
+## Demo
+Demo running at https://shinonomeiro.github.io/jautocomplete/.<br>
+Sample data: Japanese train station names (up to た) and random a-z English words.
+
 ## Public API
 The public API exposes these two functions: <i>add</i> and <i>find</i>.
 
