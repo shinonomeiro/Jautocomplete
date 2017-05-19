@@ -9,6 +9,20 @@ const Jautocomplete = (() => {
     const root = new TrieNode();
     let wordCount = 0;
 
+    let options = {
+        limitAlpha: 5,
+        limitKana: 3,
+        limitKanji: 2
+    }
+
+    /*
+    * [Public]
+    * Set user-defined options
+    */
+    function config(opt) {
+        options = Object.assign({}, options, opt);
+    }
+
     /*
     * References:
     * http://jrgraphix.net/r/Unicode/3040-309F (Hiragana)
@@ -108,13 +122,28 @@ const Jautocomplete = (() => {
             current = current.children[j];
         }
 
+        let limit; // How far the lookahead should go
+
+        if (/^[\x00-\x7F]+$/.test(prefix)) {
+            // prefix is ASCII only
+            limit = options.limitAlpha;
+        } else if (/^[\u3040-\u30FF]+$/.test(prefix)) {
+            // prefix is hiragana/katakana only
+            limit = options.limitKana;
+        } else {
+            // prefix is likely to be kanjis or a mix
+            limit = options.limitKanji;
+        }
+
         (function lookAhead(str, node) {
             if (node.isLeaf) {
                 node.transforms.forEach(w => matches.push(w));
             }
 
-            for (let k in node.children) {
-                lookAhead(str + getCharFromKey(k), node.children[k]);
+            if (str.length - prefix.length <= limit) {
+                for (let k in node.children) {
+                    lookAhead(str + getCharFromKey(k), node.children[k]);
+                }
             }
 
         })(prefix, current);
@@ -126,6 +155,7 @@ const Jautocomplete = (() => {
     * Returns public API
     */
     return {
+        config,
         add,
         find,
         wordCount // Exposed for testing, should not be used in actual production code!

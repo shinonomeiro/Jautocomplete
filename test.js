@@ -9,8 +9,8 @@ describe('Jautocomplete', function() {
         { word: 'いらっとくる', transforms: ['イラッとくる'] },
         { word: 'たべる', transforms: ['食べる'] },
         { word: 'しんじゅく らんち', transforms: ['新宿 ランチ'] },
-        { word: 'I love JavaScript!' },
-        { word: 'I love beer ~' },
+        { word: 'I love beer' },
+        { word: 'I love sake' },
         { word: 'けーき', transforms: ['ケーキ'] },
         { word: 'あたらしい', transforms: ['新しい'] },
         { word: 'こうせいず' },
@@ -50,13 +50,13 @@ describe('Jautocomplete', function() {
     describe('Find', function() {
 
         it('should find English keyword (perfect match)', function() {
-            let res = Jautocomplete.find('I love JavaScript!');
-            assert.equal(res[0], 'I love JavaScript!');
+            let res = Jautocomplete.find('I love beer');
+            assert.equal(res[0], 'I love beer');
         });
 
         it('should find English keywords (look ahead)', function() {
             let res = Jautocomplete.find('I love');
-            assert.deepEqual(res.sort(), [ 'I love beer ~', 'I love JavaScript!' ].sort());
+            assert.deepEqual(res.sort(), [ 'I love beer', 'I love sake' ].sort());
         });
 
         it('should find Japanese keyword (perfect match)', function() {
@@ -67,6 +67,11 @@ describe('Jautocomplete', function() {
         it('should find Japanese keywords (look ahead)', function() {
             let res = Jautocomplete.find('こうせい');
             assert.deepEqual(res.sort(), [ '構成', '厚生', '公正', 'こうせいず', '厚生年金' ].sort());
+        });
+
+        it('should find no matches if prefix is too short (limit test)', function() {
+            let res = Jautocomplete.find('I');
+            assert.deepEqual(res.sort(), []);
         });
 
         it('should find no matches for an unknown keyword', function() {
