@@ -7,6 +7,7 @@ const Jautocomplete = (() => {
     }
 
     const root = new TrieNode();
+    let wordCount = 0;
 
     /*
     * References:
@@ -23,7 +24,6 @@ const Jautocomplete = (() => {
 
     function _add(word) {
         let node = root;
-        word = word.replace('　', ' ').toLowerCase();
 
         for (let i = 0; i < word.length; i++) {
             let key = getKeyFromChar(word[i]);
@@ -46,17 +46,33 @@ const Jautocomplete = (() => {
     * Adds a new entry to the trie
     */
     function add(words) {
+        if (!words) {
+            return;
+        }
+
         words.forEach(e => {
             let word = e.word;
-            let transforms = e.transforms;
-            let leaf = _add(word);
 
-            if (transforms) {
+            if (!word) {
+                return;
+            }
+
+            // Filter out empty transforms
+            let transforms = e.transforms ? e.transforms.filter(w => !!w) : [];
+
+            // Add word to the trie
+            let leaf = _add(word);
+            this.wordCount++;
+
+            if (transforms && transforms.length > 0) {
                 // This word has transforms: append them to the list
                 leaf.transforms = leaf.transforms.concat(transforms);
+
                 // Add each of them to the trie as well
                 transforms.forEach(w => {
                     let c = _add(w);
+                    this.wordCount++;
+
                     // Add itself as a transform
                     c.transforms = c.transforms.concat(w);
                 });
@@ -74,9 +90,13 @@ const Jautocomplete = (() => {
     * Returns an array of suggestions, empty if none
     */
     function find(prefix) {
-        let current = root;
         let matches = [];
-        prefix = prefix.replace('　', ' ').toLowerCase();
+
+        if (!prefix) {
+            return matches;
+        }
+
+        let current = root;
 
         for (let i = 0; i < prefix.length; i++) {
             let j = getKeyFromChar(prefix[i]);
@@ -107,7 +127,8 @@ const Jautocomplete = (() => {
     */
     return {
         add,
-        find
+        find,
+        wordCount // Exposed for testing, should not be used in actual production code!
     };
 
 })();
