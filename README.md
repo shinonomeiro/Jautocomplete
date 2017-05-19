@@ -17,7 +17,25 @@ The library may be imported onto your webpage by copying <i>jautocomplete.js</i>
 WIP
 
 ## Usage
-The public API exposes two functions: <i>add</i> and <i>find</i>.
+The public API exposes three functions: <i>config</i>, <i>add</i> and <i>find</i>.
+
+### Jautocomplete.config( opt: Object )
+Sets custom options to the library.<br>
+Below are the currently available options and their default values:
+
+```javascript
+{
+ limitAlpha: 5, // if search is alphabet, look ahead up to 5 characters
+ limitKana: 4, // if search is hiragana / katakana, look ahead up to 4 characters
+ limitKanji: 3 // if search is kanji and/or mixed, look ahead up to 3 characters
+}
+```
+
+These default values should be sufficient for most implementations, but you may tweak them at will to satisfy your accuracy and performance requirements.
+
+```javascript
+Jautocomplete.config({ limitKana: 10 });
+```
 
 ### Jautocomplete.add( words: Array )
 Adds an array of words to Jautocomplete. Data must be of the following format:
