@@ -99,7 +99,7 @@ console.log(res); // ['構成', '厚生', '厚生年金', '公正', '校正']
 - Support for alphabet partial lookups not supported as of yet, e.g. "invrtbr" will not yield "invertebrates" as Google does. I might add it in the future if I come up with a good implementation, though as the library description suggests, it is more optimized for Japanese input. ご了承ください。
 - The engine will yield all possible matches for a given prefix up to a configurable limit, and the list could be quite long if you fed it a lot of data, a high limit and a short prefix to work with. At the moment filtering and sorting results are left to your discretion (see Todos below). Fine-tune the limits to suit your needs.
 - This is a library, and as such, no UI logic is provided on this repository. The demo is purely, uh, for demonstration purposes and is only a basic usage showcase. You will have to implement the UI yourself.
-- Lookups are synchronous at the moment, but async searches would be definitely welcome.
+- Lookups are synchronous.
 
 ## Tests
 Tests can be run with `npm test` from the command line prompt.
