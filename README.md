@@ -20,7 +20,7 @@ WIP
 The public API exposes three functions: <i>config</i>, <i>add</i> and <i>find</i>.
 
 ### Jautocomplete.config( opt: Object )
-Sets custom options to the library.<br>
+Sets custom options for the engine.<br>
 Below are the currently available options and their default values:
 
 ```javascript
@@ -97,7 +97,7 @@ console.log(res); // ['構成', '厚生', '厚生年金', '公正', '校正']
 ## Notes
 - Support for partial Japanese lookups not supported and won't be anytime soon. E.g. "新宿ぎょ" will not yield "新宿御苑", but "しんじゅくぎょ" will. In my opinion the trade-off between the added computation and code complexity, and the user experience is not really worth the pain of implementing it.
 - Support for partial alphabet lookups not supported as of yet, e.g. "invrtbr" will not yield "invertebrates" as Google does. I might add it in the future if I come up with a good implementation, though as the library description suggests, it is more optimized for Japanese input. ご了承ください。
-- The library will yield all possible keywords for a given prefix, and the list could be quite long if you fed it a lot of data and a short prefix to work with. As an example, the demo page from above loads 5000 Japanese keywords (10,000 total if counting the transforms as well which, as an implementation detail, are added automatically) plus 2500 English keywords. Filtering and/or sorting results is currently left to your discretion (see Todos below).
+- The engine will yield all possible keywords for a given prefix, and the list could be quite long if you fed it a lot of data and a short prefix to work with. As an example, the demo page from above loads 5000 Japanese keywords (10,000 total if counting the transforms as well which, as an implementation detail, are added automatically) plus 2500 English keywords. Filtering and/or sorting results is currently left to your discretion (see Todos below).
 - This is a library, and as such, no UI logic is provided on this repository. The demo is purely, uh, for demonstration purposes and is only a basic usage showcase. You will have to implement the UI yourself.
 
 ## Tests
