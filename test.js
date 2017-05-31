@@ -1,5 +1,5 @@
-var assert = require('chai').assert;
-var Jautocomplete = require('./index');
+const assert = require('chai').assert;
+const Jautocomplete = require('./index');
 
 describe('Jautocomplete', function() {
 
@@ -38,9 +38,9 @@ describe('Jautocomplete', function() {
             assert.equal(Jautocomplete.wordCount, wordCount);
         });
 
-        it('should skip empty transforms, e.g. transforms: [ \'\', \'あり\' ]', function() {
+        it('should skip empty transforms, e.g. { word: \'ついか\', transforms: [ \'\', \'追加\' ]　}', function() {
             Jautocomplete.add([
-                { word: 'foo', transforms: [ '', 'あり' ] }
+                { word: 'foo', transforms: [ '', '有り' ] }
             ]);
             assert.equal(Jautocomplete.wordCount, wordCount + 2);
         });
@@ -71,7 +71,7 @@ describe('Jautocomplete', function() {
 
         it('should find no matches if prefix is too short (limit test)', function() {
             let res = Jautocomplete.find('I');
-            assert.deepEqual(res.sort(), []);
+            assert.equal(res.length, 0);
         });
 
         it('should find no matches for an unknown keyword', function() {

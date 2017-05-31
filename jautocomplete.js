@@ -7,7 +7,6 @@ const Jautocomplete = (() => {
     }
 
     const root = new TrieNode();
-    let wordCount = 0;
 
     let options = {
         limitAlpha: 5,
@@ -28,19 +27,25 @@ const Jautocomplete = (() => {
     * http://jrgraphix.net/r/Unicode/3040-309F (Hiragana)
     * http://jrgraphix.net/r/Unicode/30A0-30FF (Katakana)
     */
-    function getKeyFromChar(c) {
+    function _getKeyFromChar(c) {
         return c.charCodeAt(0);
     }
 
-    function getCharFromKey(k) {
+    function _getCharFromKey(k) {
         return String.fromCharCode(k);
+    }
+
+    function _merge(a1, a2) {
+        return a1.concat(a2.filter(function(item) {
+            return a1.indexOf(item) < 0;
+        }));
     }
 
     function _add(word) {
         let node = root;
 
         for (let i = 0; i < word.length; i++) {
-            let key = getKeyFromChar(word[i]);
+            let key = _getKeyFromChar(word[i]);
 
             if (!node.children[key]) {
                 node.children[key] = new TrieNode();
@@ -49,7 +54,10 @@ const Jautocomplete = (() => {
             node = node.children[key];
         }
 
-        node.isLeaf = true;
+        if (!node.isLeaf) {
+            node.isLeaf = true;
+            Jautocomplete.wordCount++;
+        }
 
         // Return leaf node
         return node;
@@ -76,24 +84,21 @@ const Jautocomplete = (() => {
 
             // Add word to the trie
             let leaf = _add(word);
-            this.wordCount++;
 
-            if (transforms && transforms.length > 0) {
+            if (transforms.length > 0) {
                 // This word has transforms: append them to the list
-                leaf.transforms = leaf.transforms.concat(transforms);
+                leaf.transforms = _merge(leaf.transforms, transforms);
 
                 // Add each of them to the trie as well
                 transforms.forEach(w => {
                     let c = _add(w);
-                    this.wordCount++;
-
                     // Add itself as a transform
-                    c.transforms = c.transforms.concat(w);
+                    c.transforms = _merge(c.transforms, [ w ]);
                 });
 
             } else {
                 // This word doesn't have transforms: add itself as a transform
-                leaf.transforms = leaf.transforms.concat(word);
+                leaf.transforms = _merge(leaf.transforms, [ word ]);
             }
         });
     }
@@ -113,7 +118,7 @@ const Jautocomplete = (() => {
         let current = root;
 
         for (let i = 0; i < prefix.length; i++) {
-            let j = getKeyFromChar(prefix[i]);
+            let j = _getKeyFromChar(prefix[i]);
 
             if (!current.children[j]) {
                 return matches;
@@ -122,7 +127,7 @@ const Jautocomplete = (() => {
             current = current.children[j];
         }
 
-        let limit; // How far the lookahead should go
+        let limit; // How far the lookahead should proceed
 
         if (/^[\x00-\x7F]+$/.test(prefix)) {
             // prefix is ASCII only
@@ -137,12 +142,12 @@ const Jautocomplete = (() => {
 
         (function lookAhead(str, node) {
             if (node.isLeaf) {
-                node.transforms.forEach(w => matches.push(w));
+                node.transforms.forEach(w =>　matches = _merge(matches, [w]));
             }
 
             if (str.length - prefix.length <= limit) {
                 for (let k in node.children) {
-                    lookAhead(str + getCharFromKey(k), node.children[k]);
+                    lookAhead(str + _getCharFromKey(k), node.children[k]);
                 }
             }
 
@@ -157,11 +162,12 @@ const Jautocomplete = (() => {
     return {
         config,
         add,
-        find,
-        wordCount // Exposed for testing, should not be used in actual production code!
+        find
     };
 
 })();
+
+Jautocomplete.wordCount = 0;
 
 // Export as module if modules are supported on current platform
 
