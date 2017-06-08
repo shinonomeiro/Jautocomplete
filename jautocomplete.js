@@ -169,6 +169,24 @@ const Jautocomplete = (() => {
 
 Jautocomplete.wordCount = 0;
 
+// Interface for use as a web worker
+
+onmessage = e => {
+    var msg = e.data;
+
+    switch (msg.action) {
+        case 'CONFIG':
+            Jautocomplete.config(msg.options);
+            break;
+        case 'ADD':
+            Jautocomplete.add(msg.words);
+            break;
+        case 'FIND':
+            postMessage(Jautocomplete.find(msg.prefix));
+            break;
+    }
+};
+
 // Export as module if modules are supported on current platform
 
 if (typeof exports !== 'undefined') {
