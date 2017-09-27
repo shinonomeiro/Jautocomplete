@@ -1,5 +1,6 @@
 # Jautocomplete
-A lightweight JavaScript autocompletion library optimized for Japanese input. Can be used as a pure front-end alternative to AJAX calls to a back-end database.
+A lightweight autocompletion library written in JavaScript and optimized for Japanese input.<br/>
+Can be used as a pure front-end alternative to AJAX calls to a back-end database.
 
 ## Demo
 Demo running at https://shinonomeiro.github.io/jautocomplete/.<br>
