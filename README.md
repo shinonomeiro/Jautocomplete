@@ -48,27 +48,27 @@ var words = [
   { word: 'けーき', transforms: ['ケーキ'] },
   { word: 'みなとみらいえき', transforms: ['みなとみらい駅'] },
   { word: 'いけぶくろ らんち', transforms: ['池袋 ランチ'] },
-  // ▼ should only have one transform, both included here for completeness
+  // ▼ Should have only a single transform, both included here for completeness
   { word: 'ざ・りんぐ', transforms: ['ザリング', 'ザ・リング'] },
-  { word: 'あまつさえ' }
+  { word: 'あまつさえ' } // Transforms are omitted as no conversion is needed
   { word: 'I love JavaScript' }
 ];
 
 Jautocomplete.add(words);
 ```
 
-<i>word</i> <b>MUST</b> be hiragana or alphabet characters (with the exception of ー long bar and punctuation such as ・), but transforms can theoretically be anything, although kanji conversions from the associated furiganas are much preferred (as one would obtain from 自動変換, IME's auto-conversion). The accuracy of subsequent queries highly depends on your input dataset so be consistent. 
+<i>word</i> <b>MUST</b> be hiragana or alphabet characters (with the exception of ー long bar and punctuation such as ・), but transforms can theoretically be anything, although kanji conversions from the associated furiganas are much preferred (as one would obtain from 自動変換, IME's auto-conversion). The accuracy of subsequent queries highly depends on your input dataset so try to be consistent. Of course that is if it's intended to be used for its initial purpose; do feel free to experiment and bend it in some exotic manner as you like. Some feedback would also be deeply appreciated!
 
 <i>transforms</i> <b>MAY</b> be omitted if the keyword is identical to the suggestion, as it is the case with hiragana-only or alphabet words.
 
-<b>Important:</b> This library has no opinion over character case (upper or lower) or space width (full or half) and will register entries as-is. As mentioned above, accuracy tuning all depends on your dataset and you may have to implement lowercasing and/or other text formatting logic on the front-end if required before feeding user input to <i>find</i>.
+<b>Important:</b> This library has no opinion over character case (upper or lower) or space width (full or half) and will register entries as-is. As mentioned above, accuracy tuning all depends on your dataset and you may have to implement lowercasing and/or other text formatting logic on your user inputs if required before feeding them to <i>find()</i>.
 
 This function has no return value. Also, empty words and transforms will be silently ignored.
 
 ```javascript
 { word: '', transforms: [ '無視' ] } // Ignored
 { word: 'むし', transforms: [ '' ] } // Ignored
-// First transform ignored but 'むし' and '無視しないで' will be processed normally
+// ▼ First transform ignored but 'むし' and '無視しないで' will be processed normally
 { word: 'むし', transforms: [ '', '無視しないで' ] }
 ```
 
